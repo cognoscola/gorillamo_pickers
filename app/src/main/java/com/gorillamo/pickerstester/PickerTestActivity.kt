@@ -20,10 +20,13 @@ class PickerTestActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
 
-        supportFragmentManager.beginTransaction()
+       /* supportFragmentManager.beginTransaction()
             .add(R.id.fragmentContainer,FrequencyPickerFragment.newInstance{
                 resultTextView?.text = "$it"
             })
-            .commit()
+            .commit()*/
+
+        DialogTester().show(supportFragmentManager.beginTransaction(),"Show")
+
     }
 }

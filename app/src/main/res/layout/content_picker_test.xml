@@ -10,7 +10,6 @@
     tools:showIn="@layout/activity_picker_test"
     android:id="@+id/fragmentContainer"
     android:background="#999999"
-
     >
 
 </androidx.constraintlayout.widget.ConstraintLayout>
