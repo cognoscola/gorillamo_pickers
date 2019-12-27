@@ -1,0 +1,2 @@
+include ':app', ':pickers'
+rootProject.name='pickerstester'

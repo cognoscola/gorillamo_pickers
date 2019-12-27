@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">pickerstester</string>
+    <string name="title_activity_picker_test">PickerTestActivity</string>
+</resources>
