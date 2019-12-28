@@ -2,7 +2,9 @@ package com.gorillamo.pickers
 
 import android.content.Context
 import android.view.WindowManager
+import androidx.core.view.get
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.gorillamo.pickers.adapters.DoubleRowSelectAdapter
 import com.gorillamo.pickers.adapters.SimplePickerAdapter
@@ -11,16 +13,40 @@ import com.gorillamo.pickers.decorations.OffsetItemDecoration
 
 
 fun RecyclerView.createSimplePicker(
+    startingPosition:Int,
     choices: Array<String>,
     choiceCallback:((Int)->Unit)? = null
-){
+):LinearSnapHelper{
 
     val snapHelper = DetectableLinearSnapHelper(this,choiceCallback)
-    layoutManager =   GridLayoutManager(context, 1).apply {
+    layoutManager =  object:GridLayoutManager(context, 1){
+
+        override fun onLayoutCompleted(state: RecyclerView.State?) {
+            super.onLayoutCompleted(state)
+
+            val firstVisibleItemPosition = findFirstVisibleItemPosition()
+            val lastVisibleItemPosition = findLastVisibleItemPosition()
+            val itemsShown = lastVisibleItemPosition - firstVisibleItemPosition + 1
+
+            //Scroll to the desired position
+
+            scrollToPosition(startingPosition)
+            post{
+                findViewByPosition(startingPosition)?.let {
+                    val snapDistance = snapHelper.calculateDistanceToFinalSnap(layoutManager!!,it)
+                    if (snapDistance!![0] != 0 || snapDistance[1] != 0) {
+                        smoothScrollBy(snapDistance[0], snapDistance[1])
+                    }
+                }
+            }
+        }
+    }.apply {
         orientation = GridLayoutManager.HORIZONTAL
-        scrollToPosition(0)
+//        scrollToPosition(startingPosition)
+
     }
     snapHelper.attachToRecyclerView(this)
+
     adapter = SimplePickerAdapter(choices){view ->
 
         val snapDistance = snapHelper.calculateDistanceToFinalSnap(layoutManager!!, view)
@@ -28,8 +54,12 @@ fun RecyclerView.createSimplePicker(
             this.smoothScrollBy(snapDistance[0], snapDistance[1])
         }
     }
-
     addItemDecoration(OffsetItemDecoration(context.getSystemService(Context.WINDOW_SERVICE) as WindowManager))
+
+
+
+
+    return snapHelper
 }
 
 fun RecyclerView.createDoubleRowPicker(
@@ -46,3 +76,4 @@ fun RecyclerView.createDoubleRowPicker(
     addItemDecoration(OffsetItemDecoration(context.getSystemService(Context.WINDOW_SERVICE) as WindowManager))
 
 }
+

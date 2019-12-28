@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.gorillamo.pickers.FrequencyPickerFragment
+import kotlinx.android.synthetic.main.dialog_layout.*
 
 class DialogTester :DialogFragment(){
 
@@ -16,15 +17,14 @@ class DialogTester :DialogFragment(){
     ): View? {
         return inflater.inflate(R.layout.dialog_layout,container,false
         )
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         childFragmentManager.beginTransaction()
-            .add(R.id.fragmentContainer,FrequencyPickerFragment.newInstance {
-
+            .add(R.id.fragmentContainer,FrequencyPickerFragment.newInstance(1,7) { count, range ->
+                title.text = "$count / $range"
             })
             .commit()
     }

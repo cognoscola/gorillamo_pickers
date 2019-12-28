@@ -18,6 +18,7 @@ class PickerTestActivity : AppCompatActivity() {
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
+            DialogTester().show(supportFragmentManager.beginTransaction(),"Show")
         }
 
        /* supportFragmentManager.beginTransaction()
@@ -26,7 +27,7 @@ class PickerTestActivity : AppCompatActivity() {
             })
             .commit()*/
 
-        DialogTester().show(supportFragmentManager.beginTransaction(),"Show")
+
 
     }
 }
