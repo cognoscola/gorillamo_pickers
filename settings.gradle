@@ -1,2 +1,2 @@
-include ':app', ':pickers'
+include ':app', ':pickers', ':choosablelist'
 rootProject.name='pickerstester'

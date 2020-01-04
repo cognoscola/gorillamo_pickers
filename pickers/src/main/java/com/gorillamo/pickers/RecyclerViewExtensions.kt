@@ -24,12 +24,7 @@ fun RecyclerView.createSimplePicker(
         override fun onLayoutCompleted(state: RecyclerView.State?) {
             super.onLayoutCompleted(state)
 
-            val firstVisibleItemPosition = findFirstVisibleItemPosition()
-            val lastVisibleItemPosition = findLastVisibleItemPosition()
-            val itemsShown = lastVisibleItemPosition - firstVisibleItemPosition + 1
-
             //Scroll to the desired position
-
             scrollToPosition(startingPosition)
             post{
                 findViewByPosition(startingPosition)?.let {
@@ -42,8 +37,6 @@ fun RecyclerView.createSimplePicker(
         }
     }.apply {
         orientation = GridLayoutManager.HORIZONTAL
-//        scrollToPosition(startingPosition)
-
     }
     snapHelper.attachToRecyclerView(this)
 

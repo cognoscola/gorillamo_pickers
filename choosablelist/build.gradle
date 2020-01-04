@@ -1,8 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'digital.wup.android-maven-publish'
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -26,18 +24,6 @@ android {
 
 }
 
-publishing {
-    publications {
-        mavenAar(MavenPublication) {
-            groupId = 'com.gorillamo.pickers'
-            artifactId = 'pickers'
-            version = '0.1.0'
-            from components.android
-        }
-    }
-}
-
-
 dependencies {
     def applicationDependencies = rootProject.ext.mainApplication
     def testingDependencies = rootProject.ext.unitTesting
@@ -51,10 +37,6 @@ dependencies {
     implementation applicationDependencies.recycler
 
     testImplementation testingDependencies.junit
-
     androidTestImplementation acceptanceDependencies.androidJUnit
     androidTestImplementation acceptanceDependencies.espressoCore
-    implementation project(path: ':choosablelist')
-
-
 }

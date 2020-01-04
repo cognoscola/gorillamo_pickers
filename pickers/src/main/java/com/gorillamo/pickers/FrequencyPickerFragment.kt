@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import kotlinx.android.synthetic.main.fragment_frequency_picker.*
 
+//TODO create tests
+//TODO Create a View for the recycler views
+//TODO which uses sealed classes
 
 class FrequencyPickerFragment : Fragment() {
 
@@ -20,9 +23,6 @@ class FrequencyPickerFragment : Fragment() {
 
     private var countIndex = 0
     private var rangeIndex = 0
-
-    private var countSnapHelper:LinearSnapHelper? = null
-    private var rangeSnapHelper:LinearSnapHelper? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -35,23 +35,19 @@ class FrequencyPickerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 //        val amountArray = arrayOf("Once", "Twice","3x","4x", "5x","10x")
-        val amountArray = arrayOf("Once")
-        countSnapHelper = recyclerCount?.createSimplePicker(countIndex,amountArray){
-            count = getAmount(amountArray[it])
+        recyclerCount?.setItemClickcallback {
+            count = it
             submit(count,range)
         }
 
-        val timeArray = arrayOf("Day", "2 Days","3 Days","Week","Month","Year" )
-        rangeSnapHelper = recyclerRange?.createSimplePicker(rangeIndex,timeArray){
-
-            range = getTimeSpan(timeArray[it])
+        recyclerRange.setItemClickcallback{
+            range = it
             submit(count,range)
         }
 
         //by default our frequency is once per day
         submit(count,range)
     }
-
 
     companion object {
 
@@ -67,37 +63,6 @@ class FrequencyPickerFragment : Fragment() {
     }
 
     private fun findFrequency(amount:Float, timeSpan:Float):Float = amount.toFloat().div(timeSpan)
-
-    private fun getAmount(amountString:String):Int{
-
-        return when(amountString){
-
-            "Once" -> 1
-            "Twice" -> 2
-            "3x" -> 3
-            "4x" -> 4
-            "5x" -> 5
-            "10x" -> 10
-            else -> 1
-
-        }
-    }
-
-    private fun getTimeSpan(timeString:String):Int{
-
-        return when (timeString) {
-            "Day" -> 1
-            "2 Days" -> 2
-            "3 Days" -> 3
-            "4 Days" -> 4
-            "Week" -> 7
-            "Month" -> 30
-//            "2 Months" -> 60.0f
-//            "6 Months" -> (30.0*6.0f).toFloat()
-            "Year" -> 365
-            else -> 1
-        }
-    }
 
     //TODO MOVE TO SEPERATE SEALED CLASS OBJECT
     private fun getRangeIndex(value:Int):Int{

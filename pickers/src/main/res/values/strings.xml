@@ -3,4 +3,33 @@
 
     <string name="frequency_per">Every:</string>
     <string name="frequency_title">How often?</string>
+
+    <string-array name="count">
+        <item>Once</item>
+    </string-array>
+
+    <integer-array name="count_values">
+        <item>1</item>
+    </integer-array>
+
+    <string-array name="range">
+
+<!--        "Day", "2 Days","3 Days","Week","Month","Year" -->
+        <item>Day</item>
+        <item>2 Days</item>
+        <item>3 Days</item>
+        <item>Week</item>
+        <item>Month</item>
+        <item>Year</item>
+    </string-array>
+
+    <integer-array name="values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>7</item>
+        <item>30</item>
+        <item>365</item>
+
+    </integer-array>
 </resources>
