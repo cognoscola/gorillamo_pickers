@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 
 
-class ChoosableList<T> :RecyclerView{
+class ChoosableList :RecyclerView{
 
     lateinit var values:IntArray
     lateinit var names:Array<String>
@@ -39,12 +39,18 @@ class ChoosableList<T> :RecyclerView{
         val namesId = typedArray.getResourceId(R.styleable.ChoosableList_names, 0);
         val valuesId = typedArray.getResourceId(R.styleable.ChoosableList_values, 0);
 
-        startingPosition = typedArray.getIndex(R.styleable.ChoosableList_startingPosition)
+        startingPosition = typedArray.getInt(R.styleable.ChoosableList_startingPosition,0)
         names = resources.getStringArray(namesId)
         values = resources.getIntArray(valuesId)
 
         if (names.size != values.size) {
             throw IllegalArgumentException("Size of Names Array and Values Array must match!")
+        }
+        if (names.size ==  0) {
+            throw IllegalArgumentException("Did you forget to specify Names attribute?")
+        }
+        if (values.size ==  0) {
+            throw IllegalArgumentException("Did you forget to specify values attribute?")
         }
 
         typedArray.recycle()
@@ -53,6 +59,8 @@ class ChoosableList<T> :RecyclerView{
 
     fun setItemClickcallback(itemClickCallback:((Int)->Unit)){
         this.itemClickCallback= itemClickCallback
+        this.itemClickCallback?.invoke(values[startingPosition])
+
     }
 
     private fun setupView(){

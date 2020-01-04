@@ -24,6 +24,7 @@ android {
 
 }
 
+
 dependencies {
     def applicationDependencies = rootProject.ext.mainApplication
     def testingDependencies = rootProject.ext.unitTesting
@@ -38,5 +39,6 @@ dependencies {
 
     testImplementation testingDependencies.junit
     androidTestImplementation acceptanceDependencies.androidJUnit
+    androidTestImplementation acceptanceDependencies.rules
     androidTestImplementation acceptanceDependencies.espressoCore
 }
