@@ -30,10 +30,9 @@
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         app:names="@array/count"
-        app:startingPosition="1"
+        app:startingPosition="0"
         app:values="@array/count_values"
         />
-
 
     <TextView
         android:layout_width="wrap_content"
@@ -53,7 +52,7 @@
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         app:names="@array/range"
-        app:startingPosition="2"
+        app:startingPosition="0"
         app:values="@array/values"
         />
 

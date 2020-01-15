@@ -6,7 +6,7 @@ publishing {
         mavenAar(MavenPublication) {
             groupId = 'com.gorillamo.pickers'
             artifactId = 'pickers'
-            version = '0.1.0'
+            version = '0.1.1'
             from components.android
         }
     }
@@ -14,5 +14,5 @@ publishing {
 
 
 dependencies {
-    implementation "com.gorillamo.ui:choosablelist:0.1.0"
+    implementation "com.gorillamo.ui:choosablelist:0.1.1"
 }

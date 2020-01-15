@@ -49,9 +49,6 @@ fun RecyclerView.createSimplePicker(
     }
     addItemDecoration(OffsetItemDecoration(context.getSystemService(Context.WINDOW_SERVICE) as WindowManager))
 
-
-
-
     return snapHelper
 }
 
